@@ -3,7 +3,7 @@ import { signUp } from "../../utilities/user-functions";
 
 export default class SignUpForm extends Component {
   state = {
-    name: "",
+    username: "",
     email: "",
     password: "",
     confirm: "",
@@ -27,7 +27,7 @@ export default class SignUpForm extends Component {
     delete formData.confirm;
     delete formData.error;
 
-    // make async call to server with the data in a different file - will bring in that function here
+    // make async call to server
     let response = await signUp(formData);
 
     console.log(response);
@@ -38,14 +38,14 @@ export default class SignUpForm extends Component {
     const disable = this.state.password !== this.state.confirm;
 
     return (
-      <div>
+      <div className="auth-container">
         <div className="form-container">
           <form autoComplete="off" onSubmit={this.handleSubmit}>
             <label>Name</label>
             <input
               type="text"
-              name="name"
-              value={this.state.name}
+              name="username"
+              value={this.state.username}
               onChange={this.handleChange}
               required
             />
@@ -74,7 +74,7 @@ export default class SignUpForm extends Component {
               required
             />
             <button type="submit" disabled={disable}>
-              SIGN UP
+              Sign Up
             </button>
           </form>
         </div>

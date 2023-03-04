@@ -7,29 +7,30 @@ const UserAuth = () => {
   const { user } = useContext(AppContext);
 
   return (
-    <div className="user-logout">
+    <div className="user-auth">
       {user ? (
-        <div>`Logged in as ${user.name}`</div>
+        <div>{`Logged in as: ${user.username}`}</div>
       ) : (
         <div>Browsing as Guest</div>
       )}
       {user ? (
-        <div className="user-btns">
+        <div className="auth-btns">
           <Link to="/profile">
-            <button className="btn-sm">Profile</button>
+            <button>View Profile</button>
           </Link>
-          <Link to="/users/logout">
-            <button className="btn-sm">Log Out</button>
+          <p>or</p>
+          <Link to="/home">
+            <button>Log Out</button>
           </Link>
         </div>
       ) : (
         <div className="auth-btns">
           <Link to="/users/signup">
-            <button className="btn-sm">Sign Up</button>
+            <button>Sign Up</button>
           </Link>
           <p>or</p>
           <Link to="/users/login">
-            <button className="btn-sm">Log In</button>
+            <button>Log In</button>
           </Link>
         </div>
       )}

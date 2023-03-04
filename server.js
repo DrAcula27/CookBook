@@ -75,7 +75,7 @@ app.post("/users/signup", async (req, res) => {
   // use User model to place user in database
   let userFromCollection = await User.create({
     email: req.body.email,
-    name: req.body.name,
+    username: req.body.username,
     // password: hashedPassword,
     password: req.body.password,
   });

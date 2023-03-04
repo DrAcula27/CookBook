@@ -33,7 +33,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="auth-container">
       <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
           <label>Email</label>
