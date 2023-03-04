@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../logo";
-import UserLogout from "../user_logout";
+import UserAuth from "../user_auth";
 import "./index.css";
 
 const Nav = () => {
@@ -11,11 +11,11 @@ const Nav = () => {
         <Link to="/home" style={{ textDecoration: "none" }}>
           <Logo />
         </Link>
-        <Link to="/view_recipes" className="button btn-sm">
+        <Link to="/recipes/view" className="button btn-sm">
           {"Search Recipes"}
         </Link>
       </div>
-      <UserLogout />
+      <UserAuth />
     </nav>
   );
 };

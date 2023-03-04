@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
 import image from "../../logo.svg";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -18,7 +19,9 @@ const HomePage = () => {
         </h1>
         <p>Browse for and create delicious recipes!</p>
         <img src={image} alt="cookbook" />
-        <button>Let's Cook!</button>
+        <Link to="/recipes/view">
+          <button>Let's Cook!</button>
+        </Link>
       </section>
       <section className="features">
         <h2>
