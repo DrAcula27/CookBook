@@ -1,18 +1,15 @@
 import "./App.css";
 import { useEffect, useState, useContext } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/home";
-import AddRecipePage from "./pages/add_recipe";
-import ViewRecipesPage from "./pages/view_recipes";
 import Nav from "./components/nav";
+import Footer from "./components/footer";
 import { getUserFromSession } from "./utilities/user-functions";
 import { AppContext } from "./contexts/app_context";
 import Loader from "react-js-loader";
-import Footer from "./components/footer";
 
 function App() {
   const [callMade, setCallMade] = useState(false);
-  let { user, setUser } = useContext(AppContext);
+  let { setUser } = useContext(AppContext);
 
   useEffect(() => {
     const getSession = async () => {
@@ -30,21 +27,17 @@ function App() {
         <>
           <div className="page-wrapper">
             <Nav />
-            {user ? (
-              <Routes>
-                <Route path="/recipes/view" element={<ViewRecipesPage />} />
-                <Route path="/recipes/add" element={<AddRecipePage />} />
-                <Route path="/*" element={<Navigate to="/home" />} />
-              </Routes>
-            ) : (
-              <HomePage />
-            )}
+            <HomePage />
             <Footer />
           </div>
         </>
       );
     } else {
-      return <Loader />;
+      return (
+        <div className={"loader"}>
+          <Loader type="bubble-scale" bgColor={"#e65a35"} size={100} />
+        </div>
+      );
     }
   };
 

@@ -1,7 +1,9 @@
 .App {
+  min-height: 100vh;
   text-align: center;
-  /* height: 100vh; */
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .page-wrapper {
