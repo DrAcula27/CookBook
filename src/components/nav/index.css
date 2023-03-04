@@ -1,0 +1,13 @@
+.nav {
+  grid-area: nav;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3vmin 2vmin;
+}
+
+.nav .left-links {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}

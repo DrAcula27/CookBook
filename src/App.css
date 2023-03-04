@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+  /* height: 100vh; */
+  display: flex;
+}
+
+.page-wrapper {
+  /* main grid */
+  display: grid;
+  grid: auto 1fr auto / 10vw 1fr 10vw;
+  grid-template-areas:
+    "nav nav nav"
+    "main main main"
+    "footer footer footer";
+  min-height: 100vh;
+
+  background-color: var(--white);
+  width: 100%;
+  margin: 2vmin;
+  border-radius: 1em;
+  box-shadow: 0.1em 0.1em 0.2em rgba(141, 131, 119, 0.8),
+    -0.1em -0.1em 0.2em rgba(141, 131, 119, 0.2);
+}

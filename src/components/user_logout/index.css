@@ -1,0 +1,14 @@
+.user-logout {
+  font-size: 2rem;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.user-logout .email {
+  font-size: smaller;
+}
+
+.user-logout .auth-btns {
+  display: flex;
+  gap: 1rem;
+}
