@@ -2,26 +2,40 @@ const mongoose = require("mongoose");
 
 const recipeSchema = new mongoose.Schema(
   {
-    name: {
+    idMeal: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    strMeal: {
       type: String,
       required: true,
     },
-    category: {
+    strCategory: {
       type: String,
     },
-    ingredients: {
+    strArea: {
+      type: String,
+    },
+    strIngredients: {
       type: [String],
     },
-    instructions: {
+    strInstructions: {
+      type: String,
+    },
+    strMealThumb: {
       type: String,
     },
     cuisine: {
       type: String,
     },
-    tags: {
+    strTags: {
       type: [String],
     },
-    youtubeLink: {
+    strYoutube: {
+      type: String,
+    },
+    strMeasures: {
       type: String,
     },
   },

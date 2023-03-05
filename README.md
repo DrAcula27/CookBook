@@ -52,7 +52,7 @@ This project uses the MERN stack.
 Other technologies used include:
 | Auth | Styling | Searching |
 | -------- | ---------- | --------------------- |
-| Passport | Skeleton.css | Calling Spoonacular API |
+| Passport | Skeleton.css | Calling TheMealDB API |
 | Express-session | Custom CSS | |
 
 ## Author

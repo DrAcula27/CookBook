@@ -39,6 +39,10 @@ body {
   padding: 3rem;
 }
 
+.grid-area-main {
+  grid-area: main;
+}
+
 /* .align-ctr {
   text-align: center;
 } */
@@ -51,11 +55,11 @@ body {
   font-size: smaller;
 } */
 
-/* .flex-ctr-ctr {
+.flex-ctr-ctr {
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+}
 
 /* .flex-col {
   flex-direction: column;

@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const cors = require("cors");
+const axios = require("axios");
 // const bcrypt = require("bcrypt");
 
 const passport = require("passport");
@@ -104,6 +105,23 @@ app.put("/users/login", async (req, res, next) => {
       });
     }
   })(req, res, next);
+});
+
+app.post("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/home");
+  });
+});
+
+app.get(`/get_recipes/`, async (req, res) => {
+  const apiResponse = await axios.get(
+    `www.themealdb.com/api/json/v1/1/random.php`
+  );
+  console.log(apiResponse);
+  res.json(apiResponse);
 });
 
 // catch-all route for get requests, must be last in route list

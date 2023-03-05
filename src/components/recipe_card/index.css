@@ -1,0 +1,13 @@
+.recipe-card {
+  background-color: var(--orange);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+.recipe-card:hover {
+  cursor: pointer;
+  box-shadow: 0.1em 0.1em 0.2em var(--action-color),
+    -0.1em -0.1em 0.2em var(--action-color);
+}

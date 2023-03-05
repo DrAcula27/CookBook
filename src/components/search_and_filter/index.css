@@ -1,0 +1,23 @@
+.search-and-filter {
+  background-color: var(--accent-color);
+  gap: 4rem;
+  padding: 1rem;
+}
+
+.search-and-filter button {
+  border: 1px solid var(--text-light);
+  margin: 0;
+}
+
+.search-and-filter input {
+  margin: 0;
+}
+
+.search-and-filter button:hover {
+  color: var(--white);
+  border: 1px solid var(--white);
+}
+
+.search {
+  display: flex;
+}

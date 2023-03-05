@@ -29,3 +29,12 @@ export const getUserFromSession = async () => {
     return false;
   }
 };
+
+export const logOut = async () => {
+  let serverResponse = await axios({
+    method: "POST",
+    url: "/logout",
+  });
+
+  return serverResponse;
+};
