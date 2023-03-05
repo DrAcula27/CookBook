@@ -2,9 +2,15 @@ import React, { useContext } from "react";
 import "./index.css";
 import { AppContext } from "../../contexts/app_context";
 import { Link } from "react-router-dom";
+// import axios from "axios";
 
 const UserAuth = () => {
-  const { user } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
+
+  const handleLogout = async () => {
+    // await axios.post("/logout");
+    setUser(false);
+  };
 
   return (
     <div className="user-auth">
@@ -20,7 +26,7 @@ const UserAuth = () => {
           </Link>
           <p>or</p>
           <Link to="/home">
-            <button>Log Out</button>
+            <button onClick={handleLogout}>Log Out</button>
           </Link>
         </div>
       ) : (

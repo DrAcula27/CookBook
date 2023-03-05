@@ -107,14 +107,16 @@ app.put("/users/login", async (req, res, next) => {
   })(req, res, next);
 });
 
-app.post("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/home");
-  });
-});
+// ***** ASK ABOUT THIS ON MONDAY:
+// FROM PASSPORT DOCS - https://www.passportjs.org/concepts/authentication/logout/
+// app.post("/logout", (req, res, next) => {
+//   req.logout((err) => {
+//     if (err) {
+//       return next(err);
+//     }
+//     res.redirect("/home");
+//   });
+// });
 
 app.get(`/get_recipes/`, async (req, res) => {
   const apiResponse = await axios.get(
