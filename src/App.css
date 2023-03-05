@@ -14,7 +14,7 @@
     "nav nav nav"
     "main main main"
     "footer footer footer";
-  min-height: 100vh;
+  min-height: calc(100vh - 4vmin);
 
   background-color: var(--white);
   width: 100%;

@@ -1,0 +1,27 @@
+.user-recipes {
+  margin: 2rem;
+  background-color: var(--orange);
+  border: 0.6vmin solid var(--accent-color);
+  border-radius: 2rem;
+  padding: 2rem;
+}
+
+.user-recipes aside,
+.user-recipes h4 {
+  color: var(--white);
+}
+
+.user-recipes code {
+  color: var(--text-dark);
+}
+
+.user-recipes section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
+  grid-auto-rows: max-content;
+  gap: 1rem;
+  border-radius: 1rem;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}

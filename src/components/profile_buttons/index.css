@@ -1,0 +1,11 @@
+.profile-buttons {
+  background-color: var(--tan-1);
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.profile-buttons button {
+  margin: 0;
+}

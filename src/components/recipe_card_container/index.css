@@ -1,5 +1,7 @@
 .recipe-display {
+  color: var(--white);
   margin: 2rem;
   border-radius: 1rem;
-  background-color: var(--tan-2);
+  background-color: var(--orange);
+  border: 0.6vmin solid var(--accent-color);
 }

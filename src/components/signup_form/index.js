@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
 import { signUp } from "../../utilities/user-functions";
+import "./index.css";
 
 export default class SignUpForm extends Component {
   state = {
@@ -31,6 +33,12 @@ export default class SignUpForm extends Component {
     let response = await signUp(formData);
 
     console.log(response);
+
+    // if user successfully added, redirect to /recipes/view
+    // const navigate = useNavigate();
+    // if (user) {
+    //   navigate("/recipes/view");
+    // }
   };
 
   render() {
@@ -41,7 +49,7 @@ export default class SignUpForm extends Component {
       <div className="auth-container">
         <div className="form-container">
           <form autoComplete="off" onSubmit={this.handleSubmit}>
-            <label>Name</label>
+            <label>Username</label>
             <input
               type="text"
               name="username"

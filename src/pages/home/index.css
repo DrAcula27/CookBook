@@ -12,6 +12,8 @@
 
 .welcome {
   color: var(--white);
+  font-weight: bold;
+  letter-spacing: 0.1rem;
   background-color: var(--orange);
 }
 
@@ -28,10 +30,12 @@
 .welcome button {
   color: var(--text-dark);
   border: 1px solid var(--text-dark);
+  margin-bottom: 1rem;
 }
 
 .welcome button:hover {
   color: var(--white);
+  border: 1px solid var(--white);
 }
 
 .possibilities {
