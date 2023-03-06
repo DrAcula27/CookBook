@@ -28,8 +28,8 @@
 }
 
 .welcome button {
-  color: var(--text-dark);
-  border: 1px solid var(--text-dark);
+  color: var(--white);
+  border: 1px solid var(--white);
   margin-bottom: 1rem;
 }
 

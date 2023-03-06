@@ -1,14 +1,16 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import RecipeCardContainer from "../../components/recipe_card_container";
 import RecipeCard from "../../components/recipe_card";
 import SearchAndFilter from "../../components/search_and_filter";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { AppContext } from "../../contexts/app_context";
 
 const ViewRecipes = () => {
   const [recipeArray, setRecipeArray] = useState([]);
   const [searchQueries, setSearchQueries] = useState([]);
+  // const [recipeData, setRecipeData] = useContext(AppContext);
 
   let isFirstRender = useRef(true);
 

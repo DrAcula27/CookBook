@@ -30,6 +30,11 @@ body {
   background-color: var(--tan-1);
 }
 
+a {
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
 .app-title {
   font-family: "Dancing Script", cursive;
 }

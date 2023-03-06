@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./index.css";
 
 const RecipeCardContainer = ({ children, searchQueries }) => {
@@ -12,9 +13,11 @@ const RecipeCardContainer = ({ children, searchQueries }) => {
       {searchQueries[0] === "random" ? (
         <h4>Need a little inspiration? Here is a random recipe:</h4>
       ) : (
-        <h4>Showing results for: </h4>
+        <h4>Showing results for: {[searchQueries]}</h4>
       )}
-      <section>{children}</section>
+      <section>
+        <Link to="/recipe/show">{children}</Link>
+      </section>
     </div>
   );
 };

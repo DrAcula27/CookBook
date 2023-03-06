@@ -12,6 +12,7 @@ import LogInForm from "./components/login_form";
 import { getUserFromSession } from "./utilities/user-functions";
 import { AppContext } from "./contexts/app_context";
 import Loader from "react-js-loader";
+import ShowSingleRecipe from "./pages/show_single_recipe";
 
 function App() {
   const [callMade, setCallMade] = useState(false);
@@ -38,6 +39,7 @@ function App() {
               <Route path="/users/signup" element={<SignUpForm />} />
               <Route path="/users/login" element={<LogInForm />} />
               <Route path="/recipes/view" element={<ViewRecipes />} />
+              <Route path="/recipe/show" element={<ShowSingleRecipe />} />
 
               {/* protected routes: TODO */}
               <Route path="/profile" element={<Profile />} />
