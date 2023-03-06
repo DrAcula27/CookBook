@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import { logIn, getUserFromSession } from "../../utilities/user-functions";
 import { AppContext } from "../../contexts/app_context";
 import { useNavigate } from "react-router-dom";
-import "./index.css";
 
 const Login = () => {
   let { setUser } = useContext(AppContext);

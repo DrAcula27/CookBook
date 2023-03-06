@@ -1,7 +1,21 @@
 .recipe-display {
-  color: var(--white);
   margin: 2rem;
-  border-radius: 1rem;
   background-color: var(--orange);
-  border: 0.6vmin solid var(--accent-color);
+  border: 4px solid var(--accent-color);
+  border-radius: 2rem;
+  padding: 2rem;
+}
+.recipe-display h4 {
+  color: var(--white);
+}
+
+.recipe-display section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
+  grid-auto-rows: max-content;
+  gap: 1rem;
+  border-radius: 1rem;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
 }

@@ -1,5 +1,7 @@
 .search-and-filter {
   background-color: var(--tan-1);
+  border-bottom: 2px solid var(--accent-color);
+  border-top: 2px solid var(--accent-color);
   gap: 4rem;
   padding: 1rem;
 }

@@ -3,10 +3,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 10px;
   max-width: 250px;
   max-height: 300px;
-  border: 2px solid var(--tan-3);
+  border: 2px solid var(--text-dark);
   border-radius: 1rem;
 }
 
@@ -19,4 +20,6 @@
 
 .recipe-card img {
   border-radius: 50%;
+  height: 80%;
+  width: 80%;
 }

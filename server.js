@@ -119,12 +119,12 @@ app.put("/users/login", async (req, res, next) => {
 //   });
 // });
 
-app.get(`/get_recipes/`, async (req, res) => {
+app.get(`/get_recipes`, async (req, res) => {
   const apiResponse = await axios.get(
-    `www.themealdb.com/api/json/v1/1/random.php`
+    `https://www.themealdb.com/api/json/v1/1/random.php`
   );
-  console.log(apiResponse);
-  res.json(apiResponse);
+  console.log(apiResponse.data);
+  res.json(apiResponse.data);
 });
 
 // catch-all route for get requests, must be last in route list

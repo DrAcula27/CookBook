@@ -105,9 +105,22 @@ form:invalid button[type="submit"] {
   background-color: var(--tan-4);
 }
 
-button:disabled:hover,
-a.button:disabled:hover {
-  border: none;
+.form-container button {
+  background-color: var(--action-color);
+  color: var(--white);
+}
+
+.form-container button:disabled,
+.form-container form:invalid button[type="submit"] {
+  cursor: not-allowed;
+  background-color: var(--tan-4);
+  color: var(--text-light);
+  border: 1px solid var(--tan-4);
+}
+
+.form-container button:disabled:hover,
+.form-container a.button:disabled:hover {
+  border: 1px solid var(--tan-4);
   outline: none;
   color: var(--text-light);
 }

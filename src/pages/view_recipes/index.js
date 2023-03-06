@@ -3,25 +3,37 @@ import React, { useState } from "react";
 import RecipeCardContainer from "../../components/recipe_card_container";
 import RecipeCard from "../../components/recipe_card";
 import SearchAndFilter from "../../components/search_and_filter";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 const ViewRecipes = () => {
-  // const [recipeArray, setRecipeArray] = useState([]);
+  const [recipeArray, setRecipeArray] = useState([]);
+  const [searchQueries, setSearchQueries] = useState([]);
 
-  // const makeServerCall = async () => {
-  //   const serverResponse = await axios.get(`/get_recipes/`);
-  //   console.log(serverResponse);
+  let isFirstRender = useRef(true);
 
-  //   // const results = serverResponse.data.results;
+  const makeServerCall = async () => {
+    const serverResponse = await axios.get(`/get_recipes`);
 
-  //   // setRecipeArray(results);
-  // };
-  // makeServerCall();
+    const recipes = serverResponse.data.meals;
+
+    setSearchQueries(["random"]);
+    setRecipeArray(recipes);
+  };
+
+  useEffect(() => {
+    if (isFirstRender.current === true) {
+      isFirstRender.current = false;
+      makeServerCall();
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="grid-area-main">
       <SearchAndFilter />
-      <RecipeCardContainer>
-        {/* {recipeArray.map((recipe, i) => {
+      <RecipeCardContainer searchQueries={searchQueries}>
+        {recipeArray.map((recipe, i) => {
           return (
             <RecipeCard
               key={i}
@@ -29,7 +41,7 @@ const ViewRecipes = () => {
               recipeImage={recipe.strMealThumb}
             />
           );
-        })} */}
+        })}
       </RecipeCardContainer>
     </div>
   );

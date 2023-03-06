@@ -1,5 +1,7 @@
 .profile-buttons {
   background-color: var(--tan-1);
+  border-bottom: 2px solid var(--accent-color);
+  border-top: 2px solid var(--accent-color);
   padding: 1rem;
   display: flex;
   justify-content: center;

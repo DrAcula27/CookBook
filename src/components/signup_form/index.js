@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUp } from "../../utilities/user-functions";
-import "./index.css";
 
 export default class SignUpForm extends Component {
   state = {
