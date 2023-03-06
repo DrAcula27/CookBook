@@ -14,11 +14,11 @@
     "nav nav nav"
     "main main main"
     "footer footer footer";
-  min-height: calc(100vh - 4vmin);
+  min-height: calc(100vh - 4rem);
 
   background-color: var(--white);
   width: 100%;
-  margin: 2vmin;
+  margin: 2rem;
   border-radius: 1em;
   box-shadow: 0.1em 0.1em 0.2em rgba(141, 131, 119, 0.8),
     -0.1em -0.1em 0.2em rgba(141, 131, 119, 0.2);

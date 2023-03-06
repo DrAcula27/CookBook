@@ -42,6 +42,10 @@ a {
 .auth-container {
   grid-area: main;
   padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .grid-area-main {
@@ -55,10 +59,14 @@ a {
 }
 
 .form-container {
-  padding: 3vmin;
+  padding: 2rem;
   background-color: var(--tan-1);
   border: 1px solid var(--tan-3);
-  border-radius: 1vmin;
+  border-radius: 1rem;
+  max-width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 p.error-message {
@@ -67,24 +75,23 @@ p.error-message {
 }
 
 form {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 1.25vmin;
+  display: flex;
+  flex-direction: column;
   color: var(--text-light);
   margin-bottom: 0;
 }
 
 label {
-  font-size: 2vmin;
+  font-size: 2rem;
   display: flex;
   align-items: center;
 }
 
 input {
-  padding: 1vmin;
-  font-size: 2vmin;
-  border: 0.1vmin solid var(--tan-3);
-  border-radius: 0.5vmin;
+  padding: 1rem;
+  font-size: 2rem;
+  border: 1px solid var(--tan-3);
+  border-radius: 0.5rem;
   color: var(--text-dark);
   background-image: none !important;
   outline: none;
@@ -128,8 +135,4 @@ form:invalid button[type="submit"] {
   border: 1px solid var(--tan-4);
   outline: none;
   color: var(--text-light);
-}
-
-button[type="submit"] {
-  grid-column: span 2;
 }

@@ -1,15 +1,18 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 import { AppContext } from "../../contexts/app_context";
 import { Link } from "react-router-dom";
-// import axios from "axios";
+import { logOut } from "../../utilities/user-functions";
 
 const UserAuth = () => {
   const { user, setUser } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
-    // await axios.post("/logout");
+    await logOut();
     setUser(false);
+    navigate("/home");
   };
 
   return (

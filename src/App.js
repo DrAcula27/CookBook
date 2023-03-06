@@ -4,7 +4,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/home";
 import Profile from "./pages/profile";
 import ViewRecipes from "./pages/view_recipes";
-import AddRecipes from "./pages/add_recipe";
 import Nav from "./components/nav";
 import Footer from "./components/footer";
 import SignUpForm from "./components/signup_form";
@@ -43,7 +42,6 @@ function App() {
 
               {/* protected routes: TODO */}
               <Route path="/profile" element={<Profile />} />
-              <Route path="/recipes/add" element={<AddRecipes />} />
               {/* end protected routes */}
 
               <Route path="/*" element={<Navigate to="/home" />} />

@@ -2,23 +2,31 @@
 
 > Per Scholas - Week 14 - Full Stack (MERN) - MODULE 3 PROJECT: Cook Book
 
-> This is the third and final major project through my Software Engineering course at Per Scholas. It is a fully functional web application that allows users to search for, favorite, and create their own recipes. Users can perform full CRUD operations on the recipes they create. The application also supports searching with multiple ingredients, adding ingredients from a recipe to a cart, and emailing a shopping list.
-
-<!-- ## Demo -->
-
-<!-- ### 🏠 [Live Link](https://cook-book-g2cf.onrender.com/) -->
+> This is the third and final major project through my Software Engineering course at Per Scholas. It is a fully functional web application that allows users to search for, favorite, and create their own recipes.
 
 ## Features
 
 - Anyone not logged in can:
-  - Search for recipes using keywords or one (or more) ingredients.
-  - Filter recipes by type.
+  - Search for recipes using multiple criteria including:
+    - Area, i.e. what country the recipe is from (e.g. American)
+    - Category, i.e. what type of dish it is (e.g. Breakfast or Vegitarian)
+    - Ingredient, i.e. an ingredient in the recipe
   - Add recipe ingredients to a shopping cart and email a shopping list.
-  - View the nutrition information for a recipe.
   - Create an account or log in.
 - Logged in users can perform all of the above plus:
   - Save recipes for future reference.
-  - Perform CRUD (Create, Read, Update, Delete) operations on recipes created by the user.
+  - Create their own recipes.
+  - Perform CRUD (Create, Read, Update, Delete) operations on recipes they created.
+
+<!-- ## Demo -->
+
+<!-- ### Live Link
+
+[https://cook-book-g2cf.onrender.com/](https://cook-book-g2cf.onrender.com/) -->
+
+<!-- ### Video
+
+[![Alt text](https://img.youtube.com/vi/<VIDEOID>/0.jpg)](https://www.youtube.com/watch?v=<VIDEOID>) -->
 
 ## Screenshots
 
@@ -35,6 +43,8 @@ To run the app locally:
 1. Clone the repository.
 1. Navigate to the root directory.
 1. Install dependencies using `npm install`.
+1. Create an account with [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register).
+1. Create a collection called "CookBookData.
 1. Create a `.env` file in the root directory and set the following environment variables:
    - `MONGOUSERNAME`
    - `MONGOPASSWORD`

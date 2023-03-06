@@ -31,10 +31,14 @@ export const getUserFromSession = async () => {
 };
 
 export const logOut = async () => {
-  let serverResponse = await axios({
-    method: "POST",
-    url: "/logout",
-  });
-
-  return serverResponse;
+  try {
+    let serverResponse = await axios({
+      method: "POST",
+      url: "/logout",
+      withCredentials: true,
+    });
+    return serverResponse;
+  } catch (error) {
+    console.error(error);
+  }
 };

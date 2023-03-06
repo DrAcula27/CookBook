@@ -3,7 +3,7 @@ import "./index.css";
 
 const handleAddRecipe = () => {
   // TODO
-  // when clicked, pops up a modal with a form to add a recipe
+  // when clicked, loads CRUD recipe component on user profile page
 };
 
 const handleViewCart = () => {

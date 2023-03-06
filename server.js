@@ -3,9 +3,9 @@ const path = require("path");
 const logger = require("morgan");
 const cors = require("cors");
 const axios = require("axios");
-// const bcrypt = require("bcrypt");
 
 const passport = require("passport");
+// const { logOut } = require("passport-local").Strategy;
 const session = require("express-session");
 const initializePassport = require("./config/passport-config");
 
@@ -56,6 +56,8 @@ app.use(
   })
 );
 
+app.use(passport.session());
+
 // serve build folder
 app.use(express.static(path.join(__dirname, "build")));
 
@@ -70,16 +72,11 @@ app.get("/session_info", (req, res) => {
 });
 
 app.post("/users/signup", async (req, res) => {
-  // hash password so it isn't stored as plain text
-  // let hashedPassword = await bcrypt.hash(req.body.password, 10);
-
   // use User model to place user in database
   let userFromCollection = await User.create({
     username: req.body.username,
     email: req.body.email,
-    // password: hashedPassword,
     password: req.body.password,
-    // savedRecipes: req.body.savedRecipes,
   });
 
   console.log(userFromCollection);
@@ -93,11 +90,10 @@ app.put("/users/login", async (req, res, next) => {
     if (error) throw error;
     if (!user) {
       res.json({
-        message: "login failed",
+        message: "login failed: email or password incorrect",
         user: false,
       });
     } else {
-      // add user to express session with express session's logIn method
       req.logIn(user, (error) => {
         if (error) throw error;
         res.json({
@@ -110,14 +106,18 @@ app.put("/users/login", async (req, res, next) => {
 
 // ***** ASK ABOUT THIS ON MONDAY:
 // FROM PASSPORT DOCS - https://www.passportjs.org/concepts/authentication/logout/
-// app.post("/logout", (req, res, next) => {
-//   req.logout((err) => {
-//     if (err) {
-//       return next(err);
-//     }
-//     res.redirect("/home");
-//   });
-// });
+app.post("/logout", function (req, res, next) {
+  try {
+    req.logOut(function (err) {
+      if (err) {
+        return next(err);
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  }
+  res.json("logout successful");
+});
 
 app.get(`/get_recipes`, async (req, res) => {
   const apiResponse = await axios.get(
