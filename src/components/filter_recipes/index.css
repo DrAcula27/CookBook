@@ -1,12 +1,13 @@
-.search-and-filter {
+.filter-container {
   background-color: var(--tan-1);
   border-bottom: 2px solid var(--accent-color);
   border-top: 2px solid var(--accent-color);
   gap: 4rem;
   padding: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
-#find-recipes-form {
+#filter-recipes-form {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -15,18 +16,15 @@
   flex-wrap: wrap;
 }
 
-.search-and-filter button {
+.filter button {
   margin: 0;
 }
 
-.search-and-filter input {
+.filter input {
   margin: 0;
+  min-width: 50px;
 }
 
-.search-and-filter button:hover {
+.filter button:hover {
   color: var(--white);
-}
-
-.search {
-  display: flex;
 }

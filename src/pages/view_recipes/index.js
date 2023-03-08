@@ -4,6 +4,7 @@ import RecipeCardContainer from "../../components/recipe_card_container";
 import RecipeCard from "../../components/recipe_card";
 import FilterRecipes from "../../components/filter_recipes";
 import { AppContext } from "../../contexts/app_context";
+import SearchRecipes from "../../components/search_recipes";
 
 const ViewRecipes = () => {
   const { mealsArray, setMealsArray, searchQueries, setSearchQueries } =
@@ -42,7 +43,13 @@ const ViewRecipes = () => {
 
   return (
     <div className="grid-area-main">
+      <SearchRecipes />
+      <p style={{ margin: "0", fontWeight: "bold" }}>OR</p>
       <FilterRecipes />
+      <h5 style={{ marginTop: "2rem", marginBottom: "0" }}>
+        Don't know what to cook?
+      </h5>
+      <button onClick={showRandomRecipe}>Show me a random recipe!</button>
       <RecipeCardContainer searchQueries={[searchQueries]}>
         {mealsArrayJSX}
       </RecipeCardContainer>

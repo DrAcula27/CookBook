@@ -1,0 +1,33 @@
+.search-container {
+  background-color: var(--tan-1);
+  border-bottom: 2px solid var(--accent-color);
+  border-top: 2px solid var(--accent-color);
+  gap: 4rem;
+  padding: 1rem;
+  /* margin-bottom: 1rem; */
+}
+
+#search-recipes-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search {
+  display: flex;
+}
+
+.search button {
+  margin: 0;
+}
+
+.search input {
+  margin: 0;
+}
+
+.search button:hover {
+  color: var(--white);
+}
