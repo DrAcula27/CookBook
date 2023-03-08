@@ -8,6 +8,7 @@ const Login = () => {
 
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [disabled, setDisabled] = useState(true);
+  const [credentialError, setCredentialError] = useState(null);
   const [errors, setErrors] = useState({
     emailInvalid: null,
     passwordShort: null,
@@ -57,15 +58,18 @@ const Login = () => {
     // if no form errors, try to submit form
     try {
       // make a call to the server, and authenticate
-      await logIn(formState);
+      let serverResponse = await logIn(formState);
+      console.log(serverResponse);
 
-      // get session info (user)
+      // if user authenticated, get session info (user)
       let user = await getUserFromSession();
       setUser(user);
 
-      // if user authenticated, redirect to /recipes/view
+      // redirect to /recipes/view
       if (user) {
         navigate("/recipes/view");
+      } else {
+        setCredentialError(true);
       }
     } catch (error) {
       console.error(error);
@@ -107,6 +111,9 @@ const Login = () => {
           <button type="submit" disabled={disabled}>
             Log In
           </button>
+          <p className="error-message">
+            {credentialError ? "login failed: email or password incorrect" : ""}
+          </p>
         </form>
       </div>
     </div>
