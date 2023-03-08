@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const COLLECTION = "CookBookData";
 
+console.log(process.env.MONGOUSERNAME, process.env.MONGOPASSWORD);
+
 let connectionString = `mongodb+srv://${process.env.MONGOUSERNAME}:${process.env.MONGOPASSWORD}@mongosetupcluster.muoiuud.mongodb.net/${COLLECTION}?retryWrites=true&w=majority`;
 
 // by default mongoose 'strictQuery' is true (strict) meaning we cant ask for information not in our schema

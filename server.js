@@ -135,6 +135,24 @@ app.post("/save_recipe", async (req, res) => {
   res.json("recipe saved!");
 });
 
+app.delete("/remove_saved_recipe", async (req, res) => {
+  // get logged-in user's id
+  const userId = req.session.passport.user._id;
+  console.log("logged-in user's id: ", userId);
+
+  // get `mealData`
+  console.log("req.body: ", req.body);
+  const recipeData = req.body;
+
+  // remove recipe from user's `savedRecipes` array in mongodb
+  let dbResponse = await User.findByIdAndUpdate(
+    { _id: userId },
+    { $push: { savedRecipes: { recipeData } } }
+  );
+  console.log("dbResponse from saving recipe: ", dbResponse);
+  res.json("recipe removed");
+});
+
 // ****************** API REQUEST ROUTES ****************** \\
 const baseURL = "http://www.themealdb.com/api/json/v1/1/";
 
