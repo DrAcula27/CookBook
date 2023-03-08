@@ -79,8 +79,6 @@ const ShowSingleRecipe = () => {
       ...user,
       savedRecipes: newSavedRecipes,
     });
-
-    console.log("user.savedRecipes after saving a recipe: ", user.savedRecipes);
   };
 
   return (
@@ -114,7 +112,8 @@ const ShowSingleRecipe = () => {
       </div> */}
       <h5>Instructions</h5>
       <p>{strInstructions || "instructions"}</p>
-      {user && !user.savedRecipes.includes(idMeal) ? (
+      {user &&
+      !user.savedRecipes.map((recipe) => recipe.idMeal).includes(idMeal) ? (
         <button onClick={() => handleSaveRecipe(idMeal, strMeal, strMealThumb)}>
           Save Recipe
         </button>
