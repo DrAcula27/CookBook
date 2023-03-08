@@ -55,10 +55,7 @@ const RecipeCardContainer = ({ searchQueries }) => {
 
   if (mealsArrayJSX === null) {
     mealsArrayJSX = (
-      <>
-        <p>It looks like there are no meals that meet your search criteria.</p>
-        <p>Make sure you are only searching one ingredient!</p>
-      </>
+      <p>It looks like there are no meals that meet your search criteria.</p>
     );
   }
 
