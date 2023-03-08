@@ -5,7 +5,7 @@ import axios from "axios";
 import "./index.css";
 
 const ShowSingleRecipe = () => {
-  const { meal, user } = useContext(AppContext);
+  const { meal, user, setUser } = useContext(AppContext);
   console.log("meal from show single recipe page: ", meal);
 
   const {
@@ -58,16 +58,29 @@ const ShowSingleRecipe = () => {
   };
 
   const handleSaveRecipe = async (id, title, imgURL) => {
+    const newRecipe = {
+      idMeal: id,
+      strMeal: title,
+      strMealThumb: imgURL,
+    };
+
     let serverResponse = await axios({
       method: "POST",
       url: "/save_recipe",
-      data: {
-        idMeal: id,
-        strMeal: title,
-        strMealThumb: imgURL,
-      },
+      data: newRecipe,
     });
     console.log("serverResponse for saving recipe: ", serverResponse);
+    // map through current savedRecipes array and remove the recipe whose id matches the one passed
+    let newSavedRecipes = [...user.savedRecipes];
+    newSavedRecipes.push(newRecipe);
+
+    // set some kind of state to update user's savedRecipes array
+    setUser({
+      ...user,
+      savedRecipes: newSavedRecipes,
+    });
+
+    console.log("user.savedRecipes after saving a recipe: ", user.savedRecipes);
   };
 
   return (
@@ -101,7 +114,7 @@ const ShowSingleRecipe = () => {
       </div> */}
       <h5>Instructions</h5>
       <p>{strInstructions || "instructions"}</p>
-      {user ? (
+      {user && !user.savedRecipes.includes(idMeal) ? (
         <button onClick={() => handleSaveRecipe(idMeal, strMeal, strMealThumb)}>
           Save Recipe
         </button>

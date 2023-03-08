@@ -40,7 +40,7 @@ function App() {
               <Route path="/recipes/view" element={<ViewRecipes />} />
               <Route path="/recipe/show" element={<ShowSingleRecipe />} />
 
-              {/* protected routes: TODO */}
+              {/* protected routes: FUTURE WORK */}
               <Route path="/profile/" element={<Profile />} />
               {/* end protected routes */}
 

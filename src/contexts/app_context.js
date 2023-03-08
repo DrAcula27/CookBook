@@ -8,14 +8,16 @@ const AppContextProvider = ({ children }) => {
   const [meal, setMeal] = useState("");
   const [searchQueries, setSearchQueries] = useState([]);
   const [mealId, setMealId] = useState("");
-  const [cart, setCart] = useState({
-    orderId: "",
-    checkoutDone: false,
-    updatedAt: "",
-    orderItems: [],
-    totalQty: 0,
-    orderTotal: 0,
-  });
+
+  // FUTURE WORK
+  // const [cart, setCart] = useState({
+  //   orderId: "",
+  //   checkoutDone: false,
+  //   updatedAt: "",
+  //   orderItems: [],
+  //   totalQty: 0,
+  //   orderTotal: 0,
+  // });
 
   return (
     <AppContext.Provider
@@ -35,8 +37,9 @@ const AppContextProvider = ({ children }) => {
         mealId,
         setMealId,
 
-        cart,
-        setCart,
+        // FUTURE WORK
+        // cart,
+        // setCart,
       }}
     >
       {children}

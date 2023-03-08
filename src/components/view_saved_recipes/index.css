@@ -29,7 +29,7 @@
 .user-recipes .remove-recipe-btn {
   color: var(--text-dark);
   border-color: var(--text-dark);
-  margin-top: 1rem;
+  margin-top: 0.25rem;
 }
 
 .user-recipes .remove-recipe-btn:hover {

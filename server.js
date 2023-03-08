@@ -126,10 +126,16 @@ app.post("/save_recipe", async (req, res) => {
   console.log("req.body: ", req.body);
   const recipeData = req.body;
 
+  const recipe = await Recipe.findOneAndUpdate(
+    { idMeal: recipeData.idMeal },
+    { ...recipeData },
+    { upsert: true, new: true }
+  );
+
   // add recipe to user's `savedRecipes` array in mongodb
   let dbResponse = await User.findByIdAndUpdate(
     { _id: userId },
-    { $push: { savedRecipes: { recipeData } } }
+    { $push: { savedRecipes: recipe } }
   );
   console.log("dbResponse from saving recipe: ", dbResponse);
   res.json("recipe saved!");
@@ -142,12 +148,13 @@ app.delete("/remove_saved_recipe", async (req, res) => {
 
   // get clicked recipe's id
   console.log("req.body: ", req.body);
-  const recipeId = req.body;
+  const recipe_id = req.body.id;
+  console.log("recipe_id: ", recipe_id);
 
   // remove recipe from user's `savedRecipes` array in mongodb
   let dbResponse = await User.findByIdAndUpdate(
     { _id: userId },
-    { $pull: { savedRecipes: { recipeId } } }
+    { $pull: { savedRecipes: recipe_id } }
   );
   console.log("dbResponse from saving recipe: ", dbResponse);
   res.json("recipe removed");

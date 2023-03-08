@@ -10,7 +10,9 @@ module.exports = async function (passport) {
       { usernameField: "email" },
       async (email, password, done) => {
         // check if user exists with this email
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({ email: email }).populate(
+          "savedRecipes"
+        );
         if (!user) {
           return done(null, false, { message: "email or password incorrect" });
         }
