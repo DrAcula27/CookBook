@@ -2,7 +2,7 @@
 
 > Per Scholas - Week 14 - Full Stack (MERN) - MODULE 3 PROJECT: Cook Book
 
-> This is the third and final major project through my Software Engineering course at Per Scholas. It is a fully functional web application that allows users to search for, view, and save recipes.
+> This is the third and final major project through my Software Engineering course at Per Scholas. It is a fully functional web application that allows users to search for, view, and save recipes. The application also supports searching for a recipe by name or filtering recipes by multiple criteria.
 
 ## Features
 
