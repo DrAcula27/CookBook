@@ -4,7 +4,7 @@ import {
   faGlobe,
   faMagnifyingGlass,
   faBookmark,
-  faPenToSquare,
+  // faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
 import image from "../../logo.svg";
@@ -29,7 +29,7 @@ const HomePage = () => {
         </h2>
         <div className="possibilities">
           <div className="possibility-item">
-            <h3>Discover</h3>
+            <h3 className="box-outline">Discover</h3>
             <FontAwesomeIcon
               icon={faGlobe}
               size="5x"
@@ -37,24 +37,23 @@ const HomePage = () => {
             />
             <p>
               Not sure what to cook? Browse recipes from around the world, and
-              find something that fits your fancy.
+              find something that whets your appitite.
             </p>
           </div>
           <div className="possibility-item">
-            <h3>Search</h3>
+            <h3 className="box-outline">Search</h3>
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
               size="5x"
               color="var(--accent-color)"
             />
             <p>
-              Got a specific recipe in mind? You can search for recipes by name
-              or one (or more) ingredients. You can also filter recipes by
-              category or cuisine type. Give it a try!
+              Got a specific recipe in mind? You can search for recipes by name.
+              You can also filter recipes by ingredient, category, or location.
             </p>
           </div>
           <div className="possibility-item">
-            <h3>Save</h3> {/* or maybe Bookmark, or Favorite? */}
+            <h3 className="box-outline">Save</h3>
             <FontAwesomeIcon
               icon={faBookmark}
               size="5x"
@@ -62,12 +61,15 @@ const HomePage = () => {
             />
             <p>
               Once you log in, you can save your favorite recipes to your
-              profile, add ingredients to your cart, and email that list of
-              ingredients.
+              profile! Give it a try!
+              {/* FUTURE WORK
+              add ingredients to your cart, and email that list of
+              ingredients. */}
             </p>
           </div>
+          {/* FUTURE WORK
           <div className="possibility-item">
-            <h3>Create</h3>
+            <h3 className="box-outline">Create</h3>
             <FontAwesomeIcon
               icon={faPenToSquare}
               size="5x"
@@ -79,7 +81,7 @@ const HomePage = () => {
               and add them to your profile! Of course, you can also modify or
               delete them, too.
             </p>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext } from "react";
 import { AppContext } from "../../contexts/app_context";
 import YouTube from "react-youtube";
 import axios from "axios";
@@ -8,9 +7,6 @@ import "./index.css";
 const ShowSingleRecipe = () => {
   const { meal, user } = useContext(AppContext);
   console.log("meal from show single recipe page: ", meal);
-  // const { recipeId } = useParams();
-
-  // setMealId(recipeId);
 
   const {
     idMeal,
@@ -61,9 +57,6 @@ const ShowSingleRecipe = () => {
     return <YouTube videoId={videoId} options={options} />;
   };
 
-  // const [mealState, setMealState] = useState({ id: "", title: "", img: "" });
-  // setMealState({ id: recipeId, title: strMeal, img: strMealThumb });
-
   const handleSaveRecipe = async (id, title, imgURL) => {
     let serverResponse = await axios({
       method: "POST",
@@ -100,11 +93,12 @@ const ShowSingleRecipe = () => {
       <div className="ingredients-list">
         {ingredientsJSX || "ingredients list"}
       </div>
+      {/* FUTURE WORK
       <div className="ingredient-buttons">
         <button>Select All</button>
         <button>Delselect All</button>
         <button>Add to Cart</button>
-      </div>
+      </div> */}
       <h5>Instructions</h5>
       <p>{strInstructions || "instructions"}</p>
       {user ? (

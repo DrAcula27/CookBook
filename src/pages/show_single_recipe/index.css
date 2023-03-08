@@ -10,6 +10,14 @@
   max-width: 960px;
 }
 
+.recipe-container h1 {
+  font-weight: 400;
+}
+
+.recipe-container h5 {
+  text-decoration: 2px underline var(--accent-color);
+}
+
 .recipe-container img {
   height: 300px;
   width: auto;

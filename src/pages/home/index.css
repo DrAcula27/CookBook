@@ -20,6 +20,7 @@
 .features {
   color: var(--text-dark);
   background-color: var(--white);
+  margin-top: 2rem;
 }
 
 .welcome img {
@@ -46,4 +47,9 @@
 
 .possibility-item {
   max-width: 150px;
+}
+
+.box-outline {
+  border: 3px solid var(--accent-color);
+  border-radius: 3px;
 }
