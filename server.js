@@ -140,14 +140,14 @@ app.delete("/remove_saved_recipe", async (req, res) => {
   const userId = req.session.passport.user._id;
   console.log("logged-in user's id: ", userId);
 
-  // get `mealData`
+  // get clicked recipe's id
   console.log("req.body: ", req.body);
-  const recipeData = req.body;
+  const recipeId = req.body;
 
   // remove recipe from user's `savedRecipes` array in mongodb
   let dbResponse = await User.findByIdAndUpdate(
     { _id: userId },
-    { $push: { savedRecipes: { recipeData } } }
+    { $pull: { savedRecipes: { recipeId } } }
   );
   console.log("dbResponse from saving recipe: ", dbResponse);
   res.json("recipe removed");

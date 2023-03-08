@@ -6,12 +6,36 @@ import "./index.css";
 const ViewSavedRecipes = () => {
   let { user } = useContext(AppContext);
 
-  // remove the following line after testing
-  user.savedRecipes = true;
+  console.log(user.savedRecipes);
+
+  const showRecipeDetails = () => {
+    // redirect to /recipe/show
+  };
+
+  const removeSavedRecipe = () => {
+    // remove recipe from users savedRecipes array in mongodb
+  };
+
+  const savedRecipesJSX = user.savedRecipes.map((savedRecipe, i) => {
+    return (
+      <div key={i} onClick={showRecipeDetails} className="saved-recipe">
+        <RecipeCard
+          recipeTitle={savedRecipe.strMeal || "Recipe Title"}
+          recipeImage={
+            savedRecipe.strMealThumb ||
+            "https://dummyimage.com/200x200/f6ece2/111311.png&text=recipe+image"
+          }
+        />
+        <button onClick={removeSavedRecipe} className="remove-recipe-btn">
+          Remove from saved recipes
+        </button>
+      </div>
+    );
+  });
 
   return (
     <div className="user-recipes">
-      {!user.savedRecipes ? (
+      {user.savedRecipes.length < 1 ? (
         <aside>
           <h4>You haven't created or saved any recipes yet.</h4>
           <p>
@@ -30,18 +54,7 @@ const ViewSavedRecipes = () => {
       ) : (
         <>
           <h4>Viewing your saved recipes</h4>
-          <section>
-            {/* change this to map through user's savedRecipes array */}
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-            <RecipeCard />
-          </section>
+          <section>{savedRecipesJSX}</section>
         </>
       )}
     </div>

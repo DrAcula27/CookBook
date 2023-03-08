@@ -25,3 +25,16 @@
   align-items: center;
   justify-content: center;
 }
+
+.user-recipes .remove-recipe-btn {
+  color: var(--text-dark);
+  border-color: var(--text-dark);
+  margin-top: 1rem;
+}
+
+.user-recipes .remove-recipe-btn:hover {
+  color: red;
+  border-color: red;
+  background-color: rgb(92, 7, 7);
+  font-weight: bold;
+}

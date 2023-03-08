@@ -2,12 +2,12 @@ import React from "react";
 import "./index.css";
 
 const handleAddRecipe = () => {
-  // TODO
+  // FUTURE WORK
   // when clicked, loads CRUD recipe component on user profile page
 };
 
 const handleViewCart = () => {
-  // TODO
+  // FUTURE WORK
   // when clicked, pops up a modal with the users cart
   // they will be able to remove items, adjust qty of items, and email the list of items
 };
