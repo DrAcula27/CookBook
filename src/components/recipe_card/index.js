@@ -4,7 +4,7 @@ import "./index.css";
 const RecipeCard = ({ recipeTitle, recipeImage }) => {
   return (
     <div className="recipe-card">
-      <h5 className="card-title">{recipeTitle || "recipe title"}</h5>
+      <h5 className="card-title">{recipeTitle}</h5>
       <img src={recipeImage} alt="recipe thumbnail" />
     </div>
   );

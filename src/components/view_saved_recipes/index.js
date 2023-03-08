@@ -7,7 +7,7 @@ const ViewSavedRecipes = () => {
   let { user } = useContext(AppContext);
 
   // remove the following line after testing
-  user.savedRecipes = false;
+  user.savedRecipes = true;
 
   return (
     <div className="user-recipes">

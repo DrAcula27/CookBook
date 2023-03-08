@@ -18,8 +18,12 @@
   background-color: var(--action-color);
 }
 
+.recipe-card .card-title {
+  font-size: clamp(1rem, 20px, 2rem);
+}
+
 .recipe-card img {
   border-radius: 50%;
-  height: 80%;
-  width: 80%;
+  height: 90%;
+  width: auto;
 }

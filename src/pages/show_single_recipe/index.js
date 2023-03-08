@@ -1,60 +1,119 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { useParams } from "react-router-dom";
 import { AppContext } from "../../contexts/app_context";
+import YouTube from "react-youtube";
+import axios from "axios";
 import "./index.css";
 
 const ShowSingleRecipe = () => {
-  // const [recipeData] = useContext(AppContext);
+  const { meal, user } = useContext(AppContext);
+  console.log("meal from show single recipe page: ", meal);
+  // const { recipeId } = useParams();
 
-  const recipeData = {
-    title: "Title",
-    area: "Area",
-    category: "Category",
-    image: "https://dummyimage.com/200x200/f6ece2/111311.png&text=recipe+image",
-    video: "https://www.youtube.com/embed/HkywCtna9t0",
-    ingredientList: ["item1", "item2", "item3"],
-    instructions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  // setMealId(recipeId);
+
+  const {
+    idMeal,
+    strMeal,
+    strArea,
+    strCategory,
+    strMealThumb,
+    strYoutube,
+    strInstructions,
+  } = meal;
+
+  const getIngredients = (ingFromMeal) => {
+    const ingredients = [];
+    for (let i = 1; i <= 40; i++) {
+      // assuming there are no more than 40 ingredients
+      if (ingFromMeal[`strIngredient${i}`]) {
+        const ingredient = `${ingFromMeal[`strMeasure${i}`]} - ${
+          ingFromMeal[`strIngredient${i}`]
+        }`;
+        ingredients.push(ingredient.trim());
+      }
+    }
+    return ingredients;
+  };
+  const ingredientsArray = getIngredients(meal);
+
+  const ingredientsJSX = ingredientsArray.map((ingredient, i) => {
+    return <li key={i}>{ingredient}</li>;
+  });
+
+  const extractVideoId = (url) => {
+    const regExp =
+      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[7].length === 11 ? match[7] : false;
   };
 
-  const { title, area, category, image, video, ingredientList, instructions } =
-    recipeData;
+  const videoPlayer = () => {
+    const videoId = extractVideoId(strYoutube);
+    const options = {
+      width: "300",
+      height: "200",
+      playerVars: {
+        // https://developers.google.com/youtube/player_parameters
+        autoplay: 1,
+      },
+    };
+    return <YouTube videoId={videoId} options={options} />;
+  };
 
-  const ingredientListJSX = (ingredientList) => {
-    ingredientList.forEach((ingredient) => {
-      return ingredient;
+  // const [mealState, setMealState] = useState({ id: "", title: "", img: "" });
+  // setMealState({ id: recipeId, title: strMeal, img: strMealThumb });
+
+  const handleSaveRecipe = async (id, title, imgURL) => {
+    let serverResponse = await axios({
+      method: "POST",
+      url: "/save_recipe",
+      data: {
+        idMeal: id,
+        strMeal: title,
+        strMealThumb: imgURL,
+      },
     });
+    console.log("serverResponse for saving recipe: ", serverResponse);
   };
 
   return (
     <div className="grid-area-main recipe-container">
-      <h1>{title}</h1>
+      <h1>{strMeal || "Recipe Name"}</h1>
       <div className="area-category">
-        <h5>Area: {area}</h5>
-        <h5>Category: {category}</h5>
+        <h5>
+          Area: <em>{strArea || "Area"}</em>
+        </h5>
+        <h5>
+          Category: <em>{strCategory || "Category"}</em>
+        </h5>
       </div>
       <img
-        src={image} // "https://dummyimage.com/200x200/f6ece2/111311.png&text=recipe+image"
+        src={
+          strMealThumb ||
+          "https://dummyimage.com/200x200/f6ece2/111311.png&text=recipe+image"
+        }
         alt="Recipe Thumbnail"
       />
-      <iframe
-        style={{ display: "block" }}
-        width="300"
-        height="200"
-        src={video} // "https://www.youtube.com/embed/HkywCtna9t0"
-        title={title}
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
+      {videoPlayer()}
       <h5>Ingredients</h5>
-      <div className="ingredients-list">{ingredientListJSX}</div>
+      <div className="ingredients-list">
+        {ingredientsJSX || "ingredients list"}
+      </div>
       <div className="ingredient-buttons">
         <button>Select All</button>
         <button>Delselect All</button>
         <button>Add to Cart</button>
       </div>
       <h5>Instructions</h5>
-      <p>{instructions}</p>
+      <p>{strInstructions || "instructions"}</p>
+      {user ? (
+        <button onClick={() => handleSaveRecipe(idMeal, strMeal, strMealThumb)}>
+          Save Recipe
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

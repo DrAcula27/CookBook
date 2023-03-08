@@ -5,7 +5,6 @@ const cors = require("cors");
 const axios = require("axios");
 
 const passport = require("passport");
-// const { logOut } = require("passport-local").Strategy;
 const session = require("express-session");
 const initializePassport = require("./config/passport-config");
 
@@ -13,8 +12,7 @@ require("dotenv").config();
 require("./config/database.js");
 
 const User = require("./models/user");
-
-const PORT = 5000;
+const Recipe = require("./models/recipe");
 
 const app = express();
 
@@ -61,10 +59,13 @@ app.use(passport.session());
 // serve build folder
 app.use(express.static(path.join(__dirname, "build")));
 
-// ********************************************************* \\
-// ************************* ROUTES ************************ \\
-// ********************************************************* \\
+/*
+ // ********************************************************* \\
+||   *********************** ROUTES ************************  ||
+ \\ ********************************************************* //
+*/
 
+// ********************** USER ROUTES ********************** \\
 app.get("/session_info", (req, res) => {
   res.json({
     session: req.session,
@@ -72,7 +73,6 @@ app.get("/session_info", (req, res) => {
 });
 
 app.post("/users/signup", async (req, res) => {
-  // use User model to place user in database
   let userFromCollection = await User.create({
     username: req.body.username,
     email: req.body.email,
@@ -104,8 +104,6 @@ app.put("/users/login", async (req, res, next) => {
   })(req, res, next);
 });
 
-// ***** ASK ABOUT THIS ON MONDAY:
-// FROM PASSPORT DOCS - https://www.passportjs.org/concepts/authentication/logout/
 app.post("/logout", function (req, res, next) {
   try {
     req.logOut(function (err) {
@@ -119,20 +117,90 @@ app.post("/logout", function (req, res, next) {
   res.json("logout successful");
 });
 
-app.get(`/get_recipes`, async (req, res) => {
-  const apiResponse = await axios.get(
-    `https://www.themealdb.com/api/json/v1/1/random.php`
+app.post("/save_recipe", async (req, res) => {
+  // get logged-in user's id
+  const userId = req.session.passport.user._id;
+  console.log("logged-in user's id: ", userId);
+
+  // get `mealData`
+  console.log("req.body: ", req.body);
+  const recipeData = req.body;
+
+  // add recipe to user's `savedRecipes` array in mongodb
+  let dbResponse = await User.findByIdAndUpdate(
+    { _id: userId },
+    { $push: { savedRecipes: { recipeData } } }
   );
+  console.log("dbResponse from saving recipe: ", dbResponse);
+  res.json("recipe saved!");
+});
+
+// ****************** API REQUEST ROUTES ****************** \\
+const baseURL = "http://www.themealdb.com/api/json/v1/1/";
+
+app.get(`/get_random_recipe`, async (req, res) => {
+  const apiResponse = await axios.get(`${baseURL}/random.php`);
   console.log(apiResponse.data);
   res.json(apiResponse.data);
 });
 
-// catch-all route for get requests, must be last in route list
+app.get(`/search_recipes`, async (req, res) => {
+  const config = { params: req.query };
+  console.log("axios config for /search_recipes ", config);
+
+  const apiResponse = await axios.get(`${baseURL}/search.php`, config);
+  console.log("apiResponse.data for /get_recipe_details ", apiResponse.data);
+
+  res.json(apiResponse.data);
+});
+
+app.get(`/filter_recipes`, async (req, res) => {
+  console.log("req.query from server /filter_recipes: ", req.query);
+  console.log("req.query.i from server /filter_recipes: ", req.query.i);
+  console.log("req.query.c from server /filter_recipes: ", req.query.c);
+  console.log("req.query.a from server /filter_recipes: ", req.query.a);
+
+  const i = req.query.i;
+  const c = req.query.c;
+  const a = req.query.a;
+
+  const apiResponse = await axios.get(
+    `${baseURL}/filter.php?${i ? `i=${i}` : ""}&${c ? `c=${c}` : ""}&${
+      a ? `a=${a}` : ""
+    }`
+  );
+
+  console.log("API Response: ", apiResponse.data);
+
+  res.json(apiResponse.data);
+});
+
+app.get(`/get_recipe_details`, async (req, res) => {
+  // console.log("/get_recipe_details req.query ", req.query);
+
+  const config = { params: req.query };
+  console.log("axios config for /get_recipe_details ", config);
+
+  const apiResponse = await axios.get(
+    `http://www.themealdb.com/api/json/v1/1/lookup.php?`,
+    config
+  );
+  console.log("apiResponse.data for /get_recipe_details ", apiResponse.data);
+
+  res.json(apiResponse.data);
+});
+
+// ***** MONGODB CRUD ROUTES for user-created recipes ***** \\
+// FUTURE WORK
+
+// *********** CATCH-ALL ROUTE for get requests *********** \\
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-// tell server where to listen. Must not be 3000 as React listens there.
+// tell server where to listen -> not 3000 as React listens there
+const PORT = 5000;
+
 app.listen(PORT, () => {
   console.log(`Server is Listening on ${PORT}`);
 });

@@ -41,7 +41,7 @@ function App() {
               <Route path="/recipe/show" element={<ShowSingleRecipe />} />
 
               {/* protected routes: TODO */}
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/" element={<Profile />} />
               {/* end protected routes */}
 
               <Route path="/*" element={<Navigate to="/home" />} />

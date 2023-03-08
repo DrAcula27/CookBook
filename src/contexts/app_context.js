@@ -4,19 +4,10 @@ export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
   const [user, setUser] = useState(false);
-  const [recipeData, setRecipeData] = useState({
-    idMeal: "",
-    strMeal: "",
-    strCategory: "",
-    strArea: "",
-    strInstructions: "",
-    strMealThumb: "",
-    strTags: [],
-    strYoutube: "",
-    strIngredients: [],
-    strMeasures: [],
-  });
-
+  const [mealsArray, setMealsArray] = useState([]);
+  const [meal, setMeal] = useState("");
+  const [searchQueries, setSearchQueries] = useState([]);
+  const [mealId, setMealId] = useState("");
   const [cart, setCart] = useState({
     orderId: "",
     checkoutDone: false,
@@ -32,8 +23,17 @@ const AppContextProvider = ({ children }) => {
         user,
         setUser,
 
-        recipeData,
-        setRecipeData,
+        searchQueries,
+        setSearchQueries,
+
+        mealsArray,
+        setMealsArray,
+
+        meal,
+        setMeal,
+
+        mealId,
+        setMealId,
 
         cart,
         setCart,

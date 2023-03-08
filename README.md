@@ -2,7 +2,7 @@
 
 > Per Scholas - Week 14 - Full Stack (MERN) - MODULE 3 PROJECT: Cook Book
 
-> This is the third and final major project through my Software Engineering course at Per Scholas. It is a fully functional web application that allows users to search for, favorite, and create their own recipes.
+> This is the third and final major project through my Software Engineering course at Per Scholas. It is a fully functional web application that allows users to search for, view, and save recipes.
 
 ## Features
 
@@ -11,12 +11,9 @@
     - Area, i.e. what country the recipe is from (e.g. American)
     - Category, i.e. what type of dish it is (e.g. Breakfast or Vegitarian)
     - Ingredient, i.e. an ingredient in the recipe
-  - Add recipe ingredients to a shopping cart and email a shopping list.
   - Create an account or log in.
 - Logged in users can perform all of the above plus:
-  - Save recipes for future reference.
-  - Create their own recipes.
-  - Perform CRUD (Create, Read, Update, Delete) operations on recipes they created.
+  - Save recipes for future reference. These are viewable on their profile page.
 
 <!-- ## Demo -->
 
@@ -143,8 +140,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Future Work
 
-- Incorporate an e-commerce aspect to the application where users can purchase the ingredients added to their cart.
-- Add ability to allow users to delete their account.
+- [ ] Incorporate an e-commerce aspect to the application where:
+  - [ ] users can add recipe ingredients to a shopping cart and
+  - [ ] email a shopping list or "purchase" the ingredients.
+- [ ] Add ability to allow users to delete their account.
+- [ ] Add ability for logged-in users to create, read, update, and delete (CRUD) their own recipes.
+  - _User-generated recipes will only be viewable by users that are logged-in and on their profile page._
 
 ## Attributions
 

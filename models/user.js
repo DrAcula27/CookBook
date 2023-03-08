@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-// const recipeSchema = require("./recipeSchema");
-
 const userSchema = new mongoose.Schema(
   {
     username: {
@@ -26,17 +24,14 @@ const userSchema = new mongoose.Schema(
       required: true,
       minLength: 8,
     },
-    // savedRecipes: [recipeSchema],
-
-    // OR
-
-    // savedRecipes: {
-    //   type: [recipeSchema],
-    //   index: {
-    //     partialFilterExpression: { savedRecipes: { $type: [recipeSchema] } },
-    //   },
-    //   default: null,
-    // },
+    savedRecipes: [
+      {
+        recipe: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Recipe",
+        },
+      },
+    ],
   },
   {
     timestamps: true,

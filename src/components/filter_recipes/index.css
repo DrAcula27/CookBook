@@ -6,6 +6,15 @@
   padding: 1rem;
 }
 
+#find-recipes-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .search-and-filter button {
   margin: 0;
 }

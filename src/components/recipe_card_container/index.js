@@ -1,23 +1,77 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
+import { AppContext } from "../../contexts/app_context";
+import RecipeCard from "../recipe_card";
+import axios from "axios";
 
-const RecipeCardContainer = ({ children, searchQueries }) => {
-  console.log(children);
-  console.log(searchQueries);
+const RecipeCardContainer = ({ searchQueries }) => {
+  const navigate = useNavigate();
+  const { mealsArray, setMeal } = useContext(AppContext);
 
-  // useContext for user search and filter queries to change the display message
+  console.log("mealsArray from RecipeCardContainer ", mealsArray);
+  console.log("searchQueries from RecipeCardContainer ", searchQueries[0]);
+
+  const searchQueriesJSX = searchQueries[0].map((query, i, { length }) => {
+    if (!query) {
+      return "";
+    } else if (i + 1 === length) {
+      return `${query}`;
+    } else {
+      return `${query}, `;
+    }
+  });
+  console.log("searchQueriesJSX: ", searchQueriesJSX);
+
+  const handleClick = async (id) => {
+    console.log("show-single-recipe mealId: ", id);
+
+    const config = { params: { i: id } };
+    console.log("show-single-recipe config: ", config);
+
+    const serverResponse = await axios.get(`/get_recipe_details/`, config);
+    console.log(
+      "show-single-recipe serverResponse: ",
+      serverResponse.data.meals[0]
+    );
+
+    setMeal(serverResponse.data.meals[0]);
+    navigate("/recipe/show");
+  };
+
+  let mealsArrayJSX = null;
+  if (mealsArray !== null) {
+    mealsArrayJSX = mealsArray.map((recipe) => {
+      return (
+        <div key={recipe.idMeal} onClick={() => handleClick(recipe.idMeal)}>
+          <RecipeCard
+            recipeTitle={recipe.strMeal}
+            recipeImage={recipe.strMealThumb}
+          />
+        </div>
+      );
+    });
+  }
+
+  if (mealsArrayJSX === null) {
+    mealsArrayJSX = (
+      <>
+        <p>It looks like there are no meals that meet your search criteria.</p>
+        <p>Make sure you are only searching one ingredient!</p>
+      </>
+    );
+  }
+
+  console.log("mealsArrayJSX: ", mealsArrayJSX);
 
   return (
     <div className="recipe-display">
-      {searchQueries[0] === "random" ? (
+      {searchQueries[0].includes("random") ? (
         <h4>Need a little inspiration? Here is a random recipe:</h4>
       ) : (
-        <h4>Showing results for: {[searchQueries]}</h4>
+        <h4>Showing results for: {searchQueriesJSX}</h4>
       )}
-      <section>
-        <Link to="/recipe/show">{children}</Link>
-      </section>
+      <section>{mealsArrayJSX}</section>
     </div>
   );
 };

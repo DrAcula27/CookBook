@@ -1,49 +1,50 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import RecipeCardContainer from "../../components/recipe_card_container";
 import RecipeCard from "../../components/recipe_card";
-import SearchAndFilter from "../../components/search_and_filter";
-import { useEffect } from "react";
-import { useRef } from "react";
+import FilterRecipes from "../../components/filter_recipes";
 import { AppContext } from "../../contexts/app_context";
 
 const ViewRecipes = () => {
-  const [recipeArray, setRecipeArray] = useState([]);
-  const [searchQueries, setSearchQueries] = useState([]);
-  // const [recipeData, setRecipeData] = useContext(AppContext);
+  const { mealsArray, setMealsArray, searchQueries, setSearchQueries } =
+    useContext(AppContext);
 
-  let isFirstRender = useRef(true);
+  const showRandomRecipe = async () => {
+    const serverResponse = await axios.get(`/get_random_recipe`);
 
-  const makeServerCall = async () => {
-    const serverResponse = await axios.get(`/get_recipes`);
-
-    const recipes = serverResponse.data.meals;
+    const recipe = serverResponse.data.meals;
 
     setSearchQueries(["random"]);
-    setRecipeArray(recipes);
+    setMealsArray(recipe);
   };
 
+  let isFirstRender = useRef(true);
   useEffect(() => {
     if (isFirstRender.current === true) {
       isFirstRender.current = false;
-      makeServerCall();
+      showRandomRecipe();
     }
     // eslint-disable-next-line
   }, []);
 
+  let mealsArrayJSX = null;
+  if (mealsArray !== null) {
+    mealsArrayJSX = mealsArray.map((recipe) => {
+      return (
+        <RecipeCard
+          key={recipe.idMeal}
+          recipeTitle={recipe.strMeal}
+          recipeImage={recipe.strMealThumb}
+        />
+      );
+    });
+  }
+
   return (
     <div className="grid-area-main">
-      <SearchAndFilter />
-      <RecipeCardContainer searchQueries={searchQueries}>
-        {recipeArray.map((recipe, i) => {
-          return (
-            <RecipeCard
-              key={i}
-              recipeTitle={recipe.strMeal}
-              recipeImage={recipe.strMealThumb}
-            />
-          );
-        })}
+      <FilterRecipes />
+      <RecipeCardContainer searchQueries={[searchQueries]}>
+        {mealsArrayJSX}
       </RecipeCardContainer>
     </div>
   );
