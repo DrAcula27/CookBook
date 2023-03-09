@@ -15,7 +15,7 @@ import ShowSingleRecipe from "./pages/show_single_recipe";
 
 function App() {
   const [callMade, setCallMade] = useState(false);
-  let { setUser } = useContext(AppContext);
+  let { user, setUser } = useContext(AppContext);
 
   useEffect(() => {
     const getSession = async () => {
@@ -33,19 +33,26 @@ function App() {
         <>
           <div className="page-wrapper">
             <Nav />
-            <Routes>
-              <Route path="/home" element={<HomePage />} />
-              <Route path="/users/signup" element={<SignUpForm />} />
-              <Route path="/users/login" element={<LogInForm />} />
-              <Route path="/recipes/view" element={<ViewRecipes />} />
-              <Route path="/recipe/show" element={<ShowSingleRecipe />} />
-
-              {/* protected routes: FUTURE WORK */}
-              <Route path="/profile/" element={<Profile />} />
-              {/* end protected routes */}
-
-              <Route path="/*" element={<Navigate to="/home" />} />
-            </Routes>
+            {user ? (
+              <Routes>
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/users/signup" element={<SignUpForm />} />
+                <Route path="/users/login" element={<LogInForm />} />
+                <Route path="/recipes/view" element={<ViewRecipes />} />
+                <Route path="/recipe/show" element={<ShowSingleRecipe />} />
+                <Route path="/profile/" element={<Profile />} />
+                <Route path="/*" element={<Navigate to="/home" />} />
+              </Routes>
+            ) : (
+              <Routes>
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/users/signup" element={<SignUpForm />} />
+                <Route path="/users/login" element={<LogInForm />} />
+                <Route path="/recipes/view" element={<ViewRecipes />} />
+                <Route path="/recipe/show" element={<ShowSingleRecipe />} />
+                <Route path="/*" element={<Navigate to="/home" />} />
+              </Routes>
+            )}
             <Footer />
           </div>
         </>
