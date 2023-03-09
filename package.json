@@ -1,6 +1,6 @@
 {
-  "name": "cafe-app",
-  "version": "0.1.0",
+  "name": "cook-book",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",

@@ -162,7 +162,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - [ ] Incorporate an e-commerce aspect to the application where:
   - [ ] users can add recipe ingredients to a shopping cart and
   - [ ] email a shopping list or "purchase" the ingredients.
-- [ ] Add ability to allow users to delete their account.
+- [ ] Add ability to allow users to manage their account. This includes:
+  - [ ] updating their email and/or password and
+  - [ ] deleting their account.
 - [ ] Add ability for logged-in users to create, read, update, and delete (CRUD) their own recipes.
   - _User-generated recipes will only be viewable by users that are logged-in and on their profile page._
 
