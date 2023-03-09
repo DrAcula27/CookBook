@@ -54,7 +54,7 @@ const ShowSingleRecipe = () => {
         autoplay: 1,
       },
     };
-    return <YouTube videoId={videoId} options={options} />;
+    return <YouTube videoId={videoId} opts={options} />;
   };
 
   const handleSaveRecipe = async (id, title, imgURL) => {
