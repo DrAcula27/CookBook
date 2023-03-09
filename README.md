@@ -15,11 +15,11 @@
 - Logged in users can perform all of the above plus:
   - Save recipes for future reference. These are viewable on their profile page.
 
-<!-- ## Demo -->
+## Demo
 
-<!-- ### Live Link
+### Live Link
 
-[https://cook-book-g2cf.onrender.com/](https://cook-book-g2cf.onrender.com/) -->
+[https://cook-book-g2cf.onrender.com/](https://cook-book-g2cf.onrender.com/)
 
 <!-- ### Video
 
@@ -27,10 +27,28 @@
 
 ## Screenshots
 
-**Home Page**
+### Home
 
 <kbd>
   <img src="./src/assets/img/screenshot-home.png" />
+</kbd>
+
+### View One or More Recipes
+
+<kbd>
+  <img src="./src/assets/img/screenshot-view_recipes.png" />
+</kbd>
+
+### View A Recipe's Details
+
+<kbd>
+  <img src="./src/assets/img/screenshot-view_recipe_details.png" />
+</kbd>
+
+### User Profile
+
+<kbd>
+  <img src="./src/assets/img/screenshot-profile.png" />
 </kbd>
 
 ## Installation
@@ -57,10 +75,11 @@ This project uses the MERN stack.
 - <img src="https://raw.githubusercontent.com/nodejs/nodejs.org/main/static/images/logos/js-green.svg" width="20" height="20" /> [Node](https://nodejs.org/en/)
 
 Other technologies used include:
-| Auth | Styling | Searching |
+| Auth | Styling | Search/Filter |
 | -------- | ---------- | --------------------- |
-| Passport | Skeleton.css | Calling TheMealDB API |
-| Express-session | Custom CSS | |
+| Passport | Skeleton.css | Axios |
+| Express-session | Custom CSS | React-Select |
+| Bcrypt | FontAwesome Icons | TheMealDB API |
 
 ## Author
 
@@ -69,9 +88,9 @@ Other technologies used include:
 - Github: [@DrAcula27](https://github.com/DrAcula27)
 - LinkedIn: [@daniellerandrews](https://linkedin.com/in/daniellerandrews)
 
-**This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).**
-
 ## Available Scripts
+
+**This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).**
 
 In the project directory, you can run:
 

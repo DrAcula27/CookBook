@@ -49,10 +49,6 @@ const ShowSingleRecipe = () => {
     const options = {
       width: "300",
       height: "200",
-      playerVars: {
-        // https://developers.google.com/youtube/player_parameters
-        autoplay: 1,
-      },
     };
     return <YouTube videoId={videoId} opts={options} />;
   };
