@@ -12,14 +12,20 @@ const RecipeCardContainer = ({ searchQueries }) => {
   console.log("mealsArray from RecipeCardContainer ", mealsArray);
   console.log("searchQueries from RecipeCardContainer ", searchQueries[0]);
 
-  const searchQueriesJSX = searchQueries[0].map((query) => {
-    if (!query) {
-      return "";
-    } else {
-      return `${query}`;
-    }
-  });
-  console.log("searchQueriesJSX: ", searchQueriesJSX);
+  let searchQueriesJSX;
+  if (searchQueries[0]) {
+    searchQueriesJSX = searchQueries[0]
+      .map((query) => {
+        if (!query) {
+          return "";
+        } else {
+          return `${query.trim()}`;
+        }
+      })
+      .filter((query) => query)
+      .join(", ");
+    console.log("searchQueriesJSX: ", searchQueriesJSX);
+  }
 
   const handleClick = async (id) => {
     console.log("show-single-recipe mealId: ", id);
@@ -51,7 +57,7 @@ const RecipeCardContainer = ({ searchQueries }) => {
     });
   }
 
-  if (mealsArrayJSX === null) {
+  if (!mealsArrayJSX) {
     mealsArrayJSX = (
       <p>It looks like there are no meals that meet your search criteria.</p>
     );

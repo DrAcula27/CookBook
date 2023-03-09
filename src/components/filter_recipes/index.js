@@ -716,6 +716,7 @@ const FilterRecipes = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const config = {
       params: {
         i: formState.filterIngredient.value,
@@ -725,23 +726,27 @@ const FilterRecipes = () => {
     };
     console.log("axios config from frontend: ", config);
 
-    const serverResponse = await axios.get(`/filter_recipes`, config);
-    const meals = serverResponse.data.meals;
+    if (config.params.i || config.params.c || config.params.a) {
+      const serverResponse = await axios.get(`/filter_recipes`, config);
+      const meals = serverResponse.data.meals;
 
-    if (mealsArray !== null) {
-      try {
-        setMealsArray(meals);
-        setSearchQueries([
-          formState.filterIngredient.value,
-          formState.filterCategory.value,
-          formState.filterArea.value,
-        ]);
-      } catch (error) {
-        console.error(error);
+      setMealsArray(meals);
+
+      if (mealsArray) {
+        try {
+          setMealsArray(meals);
+          setSearchQueries([
+            formState.filterIngredient.value,
+            formState.filterCategory.value,
+            formState.filterArea.value,
+          ]);
+        } catch (error) {
+          console.error(error);
+        }
       }
+      console.log("meals array: ", mealsArray);
+      console.log("axios config: ", config);
     }
-    // console.log("meals array: ", mealsArray);
-    // console.log("axios config: ", config);
   };
 
   return (
