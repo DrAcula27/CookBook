@@ -73,15 +73,29 @@ app.get("/session_info", (req, res) => {
 });
 
 app.post("/users/signup", async (req, res) => {
-  let userFromCollection = await User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-  });
+  const { username, email, password } = req.body;
 
-  console.log(userFromCollection);
+  // check if a user with that email already exists
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return res
+      .status(409)
+      .json({ message: "signup failed: email already in use" });
+  }
 
-  res.json("user added");
+  // if the email address is available, try to create a new user
+  try {
+    let newUser = await User.create({
+      username,
+      email,
+      password,
+    });
+    console.log(newUser);
+  } catch (error) {
+    console.error("SIGNUP ERROR: ", error);
+    res.json(error);
+  }
+  res.status(201).json({ message: "User created successfully" });
 });
 
 app.put("/users/login", async (req, res, next) => {
@@ -122,7 +136,7 @@ app.post("/save_recipe", async (req, res) => {
   const userId = req.session.passport.user._id;
   console.log("logged-in user's id: ", userId);
 
-  // get `mealData`
+  // get `recipeData`
   console.log("req.body: ", req.body);
   const recipeData = req.body;
 
@@ -180,11 +194,6 @@ app.get(`/search_recipes`, async (req, res) => {
 });
 
 app.get(`/filter_recipes`, async (req, res) => {
-  console.log("req.query from server /filter_recipes: ", req.query);
-  console.log("req.query.i from server /filter_recipes: ", req.query.i);
-  console.log("req.query.c from server /filter_recipes: ", req.query.c);
-  console.log("req.query.a from server /filter_recipes: ", req.query.a);
-
   const i = req.query.i;
   const c = req.query.c;
   const a = req.query.a;
@@ -201,8 +210,6 @@ app.get(`/filter_recipes`, async (req, res) => {
 });
 
 app.get(`/get_recipe_details`, async (req, res) => {
-  // console.log("/get_recipe_details req.query ", req.query);
-
   const config = { params: req.query };
   console.log("axios config for /get_recipe_details ", config);
 

@@ -22,6 +22,7 @@ const SignUpForm = () => {
     emailInvalid: null,
     passwordShort: null,
     passwordMismatch: null,
+    userAlreadyExists: null,
   });
 
   const navigate = useNavigate();
@@ -83,12 +84,11 @@ const SignUpForm = () => {
       delete formData.error;
 
       // make async call to server
-      let response = await signUp(formData);
-
-      console.log(response);
+      let serverResponse = await signUp(formData);
+      console.log("signup response: ", serverResponse);
 
       // if user successfully added, automatically log user in
-      if (response) {
+      if (serverResponse.status === 201) {
         await logIn(formData);
       }
 
@@ -102,6 +102,10 @@ const SignUpForm = () => {
       }
     } catch (error) {
       console.error(error);
+      setErrors({
+        ...errors,
+        userAlreadyExists: error.response.data.message,
+      });
     }
   };
 
@@ -131,6 +135,9 @@ const SignUpForm = () => {
               onChange={handleChange}
               required
             />
+            {errors.userAlreadyExists && (
+              <p className="error-message">{errors.userAlreadyExists}</p>
+            )}
             <p className="error-message">
               {errors.emailInvalid ? "Please enter a valid email" : ""}
             </p>
