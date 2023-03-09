@@ -29,7 +29,7 @@ const ViewRecipes = () => {
   }, []);
 
   let mealsArrayJSX = null;
-  if (mealsArray !== null) {
+  if (mealsArray) {
     mealsArrayJSX = mealsArray.map((recipe) => {
       return (
         <RecipeCard

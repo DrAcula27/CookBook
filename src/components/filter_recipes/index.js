@@ -750,7 +750,7 @@ const FilterRecipes = () => {
         <section className="filter" style={{ width: `200px` }}>
           <Select
             options={filterIngredients}
-            // isMulti
+            // isMulti -> FUTURE WORK
             isClearable
             placeholder="Filter by Ingredient"
             value={formState.filterIngredient}
@@ -765,7 +765,7 @@ const FilterRecipes = () => {
         <section className="filter" style={{ width: `200px` }}>
           <Select
             options={filterCategories}
-            // isMulti
+            // isMulti -> FUTURE WORK
             isClearable
             placeholder="Filter by Category"
             value={formState.filterCategory}
@@ -780,7 +780,7 @@ const FilterRecipes = () => {
         <section className="filter" style={{ width: `200px` }}>
           <Select
             options={filterAreas}
-            // isMulti
+            // isMulti -> FUTURE WORK
             isClearable
             placeholder="Filter by Area"
             value={formState.filterArea}

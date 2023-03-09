@@ -10,35 +10,37 @@ const SearchRecipes = () => {
   const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
-    let propertyName = e.target.name;
-    setSearch({
-      ...search,
-      [propertyName]: e.target.value,
-    });
+    setSearch(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const config = {
       params: {
-        s: search.searchName,
+        s: search,
       },
     };
     console.log("axios config from frontend: ", config);
 
-    const serverResponse = await axios.get(`/search_recipes`, config);
-    const meals = serverResponse.data.meals;
+    if (config.params.s) {
+      const serverResponse = await axios.get(`/search_recipes`, config);
+      const meals = serverResponse.data.meals;
 
-    if (mealsArray !== null) {
-      try {
-        setMealsArray(meals);
-        setSearchQueries([search.searchName]);
-      } catch (error) {
-        console.error(error);
+      setMealsArray(meals);
+
+      if (mealsArray) {
+        try {
+          setMealsArray(meals);
+          setSearchQueries([search]);
+        } catch (error) {
+          console.error(error);
+        }
       }
+      console.log("meals array: ", mealsArray);
+      console.log("axios config: ", config);
     }
-    console.log("meals array: ", mealsArray);
-    console.log("axios config: ", config);
+    setSearch("");
   };
 
   return (
@@ -48,7 +50,7 @@ const SearchRecipes = () => {
           <input
             type="search"
             name="searchName"
-            value={search.searchName}
+            value={search}
             placeholder="Search meal by name"
             onChange={handleChange}
           />

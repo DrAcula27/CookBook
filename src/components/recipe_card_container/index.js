@@ -12,13 +12,11 @@ const RecipeCardContainer = ({ searchQueries }) => {
   console.log("mealsArray from RecipeCardContainer ", mealsArray);
   console.log("searchQueries from RecipeCardContainer ", searchQueries[0]);
 
-  const searchQueriesJSX = searchQueries[0].map((query, i, { length }) => {
+  const searchQueriesJSX = searchQueries[0].map((query) => {
     if (!query) {
       return "";
-    } else if (i + 1 === length) {
-      return `${query}`;
     } else {
-      return `${query}, `;
+      return `${query}`;
     }
   });
   console.log("searchQueriesJSX: ", searchQueriesJSX);
@@ -29,7 +27,7 @@ const RecipeCardContainer = ({ searchQueries }) => {
     const config = { params: { i: id } };
     console.log("show-single-recipe config: ", config);
 
-    const serverResponse = await axios.get(`/get_recipe_details/`, config);
+    const serverResponse = await axios.get(`/get_recipe_details`, config);
     console.log(
       "show-single-recipe serverResponse: ",
       serverResponse.data.meals[0]
@@ -40,7 +38,7 @@ const RecipeCardContainer = ({ searchQueries }) => {
   };
 
   let mealsArrayJSX = null;
-  if (mealsArray !== null) {
+  if (mealsArray) {
     mealsArrayJSX = mealsArray.map((recipe) => {
       return (
         <div key={recipe.idMeal} onClick={() => handleClick(recipe.idMeal)}>
