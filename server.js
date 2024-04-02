@@ -143,7 +143,7 @@ app.post("/save_recipe", async (req, res) => {
   const recipe = await Recipe.findOneAndUpdate(
     { idMeal: recipeData.idMeal },
     { ...recipeData },
-    { upsert: true, new: true }
+    { upsert: true, new: true, runValidators: true }
   );
 
   // add recipe to user's `savedRecipes` array in mongodb
