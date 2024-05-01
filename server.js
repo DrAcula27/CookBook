@@ -67,6 +67,7 @@ app.use(express.static(path.join(__dirname, "build")));
 
 // ********************** USER ROUTES ********************** \\
 app.get("/session_info", (req, res) => {
+  if (!req.session) return res.status(400).send('no active session');
   res.json({
     session: req.session,
   });

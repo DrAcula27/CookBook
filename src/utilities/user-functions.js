@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const signUp = async (formData) => {
   let serverResponse = await axios({
-    method: "POST",
-    url: "/users/signup",
+    method: 'POST',
+    url: '/users/signup',
     data: formData,
   });
 
@@ -12,8 +12,8 @@ export const signUp = async (formData) => {
 
 export const logIn = async (formData) => {
   let serverResponse = await axios({
-    method: "PUT",
-    url: "/users/login",
+    method: 'PUT',
+    url: '/users/login',
     data: formData,
   });
 
@@ -21,11 +21,11 @@ export const logIn = async (formData) => {
 };
 
 export const getUserFromSession = async () => {
-  let response = await axios("/session_info");
-  if (response.data.session.passport) {
+  try {
+    let response = await axios('/session_info');
     let user = response.data.session.passport.user;
     return user;
-  } else {
+  } catch (error) {
     return false;
   }
 };
@@ -33,8 +33,8 @@ export const getUserFromSession = async () => {
 export const logOut = async () => {
   try {
     let serverResponse = await axios({
-      method: "POST",
-      url: "/logout",
+      method: 'POST',
+      url: '/logout',
       withCredentials: true,
     });
     return serverResponse;
