@@ -1,29 +1,24 @@
-<h1 align="center">Welcome to My Cook Book!</h1>
+<h1 align="center">Welcome to My Cook Book Recipe Saver!</h1>
 
-> Per Scholas - Week 14 - Full Stack (MERN) - MODULE 3 PROJECT: Cook Book
-
-> This is the third and final major project through my Software Engineering course at Per Scholas. It is a fully functional web application that allows users to search for, view, and save recipes. The application also supports searching for a recipe by name or filtering recipes by multiple criteria.
+> A fully functional web application that allows users to search for, view, and save recipes. The application also supports searching for a recipe by name or filtering recipes by multiple criteria.
 
 ## Features
 
 - Anyone not logged in can:
   - Search for recipes using multiple criteria including:
     - Area, i.e. what country the recipe is from (e.g. American)
-    - Category, i.e. what type of dish it is (e.g. Breakfast or Vegitarian)
+    - Category, i.e. what type of dish it is (e.g. Breakfast or Vegetarian)
     - Ingredient, i.e. an ingredient in the recipe
   - Create an account or log in.
-- Logged in users can perform all of the above plus:
-  - Save recipes for future reference. These are viewable on their profile page.
+- Logged in users can perform all of the above _plus_:
+  - Save recipes for future reference.
+  - View saved recipes on their profile page.
 
 ## Demo
 
 ### Live Link
 
-[https://cook-book-g2cf.onrender.com/](https://cook-book-g2cf.onrender.com/)
-
-<!-- ### Video
-
-[![Alt text](https://img.youtube.com/vi/<VIDEOID>/0.jpg)](https://www.youtube.com/watch?v=<VIDEOID>) -->
+[My Cook Book Recipe Saver](https://cook-book-g2cf.onrender.com/)
 
 ## Screenshots
 
@@ -76,7 +71,7 @@ This project uses the MERN stack.
 
 Other technologies used include:
 | Auth | Styling | Search/Filter |
-| -------- | ---------- | --------------------- |
+| --- | --- | --- |
 | Passport | Skeleton.css | Axios |
 | Express-session | Custom CSS | React-Select |
 | Bcrypt | FontAwesome Icons | TheMealDB API |
