@@ -1,18 +1,25 @@
-const express = require("express");
-const path = require("path");
-const logger = require("morgan");
-const cors = require("cors");
-const axios = require("axios");
+import express from "express";
+import path from "path";
+import logger from "morgan";
+import cors from "cors";
+import axios from "axios";
+import { fileURLToPath } from "url";
 
-const passport = require("passport");
-const session = require("express-session");
-const initializePassport = require("./config/passport-config");
+import passport from "passport";
+import session from "express-session";
+import initializePassport from "./config/passport-config.js";
 
-require("dotenv").config();
-require("./config/database.js");
+import dotenv from "dotenv";
+import "./config/database.js";
 
-const User = require("./models/user");
-const Recipe = require("./models/recipe");
+import User from "./models/user.js";
+import Recipe from "./models/recipe.js";
+
+// Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config();
 
 const app = express();
 
@@ -57,7 +64,7 @@ app.use(
 app.use(passport.session());
 
 // serve build folder
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "dist")));
 
 /*
  // ********************************************************* \\
@@ -228,7 +235,7 @@ app.get(`/get_recipe_details`, async (req, res) => {
 
 // *********** CATCH-ALL ROUTE for get requests *********** \\
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // tell server where to listen -> not 3000 as React listens there
