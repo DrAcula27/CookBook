@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import App from "./App.jsx";
+import reportWebVitals from "./reportWebVitals.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
-import ContextProvider from "./contexts/app_context";
+import ContextProvider from "./contexts/app_context.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

@@ -1,30 +1,38 @@
-const express = require("express");
-const path = require("path");
-const logger = require("morgan");
-const cors = require("cors");
-const axios = require("axios");
+import dotenv from 'dotenv';
 
-const passport = require("passport");
-const session = require("express-session");
-const initializePassport = require("./config/passport-config");
+import express from 'express';
+import path from 'path';
+import logger from 'morgan';
+import cors from 'cors';
+import axios from 'axios';
+import { fileURLToPath } from 'url';
 
-require("dotenv").config();
-require("./config/database.js");
+import passport from 'passport';
+import session from 'express-session';
+import initializePassport from './config/passport-config.js';
 
-const User = require("./models/user");
-const Recipe = require("./models/recipe");
+import User from './models/user.js';
+import Recipe from './models/recipe.js';
+import { connectDatabase } from './config/database.js';
+
+dotenv.config();
+connectDatabase();
+
+// Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
 // allow cross origin access - client from any source can make requests to server
 app.use(
   cors({
-    origin: "*",
+    origin: '*',
   })
 );
 
 // logs the different requests to the server
-app.use(logger("dev"));
+app.use(logger('dev'));
 
 // parse stringified objects (JSON)
 app.use(express.json());
@@ -50,14 +58,14 @@ app.use(
     saveUninitialized: true,
     // session times out after a day, user must log in again
     // 86400000ms = 24h
-    cookie: { originalMaxAge: 86400000, sameSite: "strict" },
+    cookie: { originalMaxAge: 86400000, sameSite: 'strict' },
   })
 );
 
 app.use(passport.session());
 
 // serve build folder
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 /*
  // ********************************************************* \\
@@ -66,14 +74,14 @@ app.use(express.static(path.join(__dirname, "build")));
 */
 
 // ********************** USER ROUTES ********************** \\
-app.get("/session_info", (req, res) => {
+app.get('/session_info', (req, res) => {
   if (!req.session) return res.status(400).send('no active session');
   res.json({
     session: req.session,
   });
 });
 
-app.post("/users/signup", async (req, res) => {
+app.post('/users/signup', async (req, res) => {
   const { username, email, password } = req.body;
 
   // check if a user with that email already exists
@@ -81,7 +89,7 @@ app.post("/users/signup", async (req, res) => {
   if (existingUser) {
     return res
       .status(409)
-      .json({ message: "signup failed: email already in use" });
+      .json({ message: 'signup failed: email already in use' });
   }
 
   // if the email address is available, try to create a new user
@@ -93,33 +101,33 @@ app.post("/users/signup", async (req, res) => {
     });
     console.log(newUser);
   } catch (error) {
-    console.error("SIGNUP ERROR: ", error);
+    console.error('SIGNUP ERROR: ', error);
     res.json(error);
   }
-  res.status(201).json({ message: "User created successfully" });
+  res.status(201).json({ message: 'User created successfully' });
 });
 
-app.put("/users/login", async (req, res, next) => {
-  passport.authenticate("local", (error, user, message) => {
-    console.log("message from passport config: ", message);
+app.put('/users/login', async (req, res, next) => {
+  passport.authenticate('local', (error, user, message) => {
+    console.log('message from passport config: ', message);
     if (error) throw error;
     if (!user) {
       res.json({
-        message: "login failed: email or password incorrect",
+        message: 'login failed: email or password incorrect',
         user: false,
       });
     } else {
       req.logIn(user, (error) => {
         if (error) throw error;
         res.json({
-          message: "successfully authenticated",
+          message: 'successfully authenticated',
         });
       });
     }
   })(req, res, next);
 });
 
-app.post("/logout", function (req, res, next) {
+app.post('/logout', function (req, res, next) {
   try {
     req.logOut(function (err) {
       if (err) {
@@ -129,16 +137,16 @@ app.post("/logout", function (req, res, next) {
   } catch (error) {
     console.error(error);
   }
-  res.json("logout successful");
+  res.json('logout successful');
 });
 
-app.post("/save_recipe", async (req, res) => {
+app.post('/save_recipe', async (req, res) => {
   // get logged-in user's id
   const userId = req.session.passport.user._id;
   console.log("logged-in user's id: ", userId);
 
   // get `recipeData`
-  console.log("req.body: ", req.body);
+  console.log('req.body: ', req.body);
   const recipeData = req.body;
 
   const recipe = await Recipe.findOneAndUpdate(
@@ -152,31 +160,31 @@ app.post("/save_recipe", async (req, res) => {
     { _id: userId },
     { $push: { savedRecipes: recipe } }
   );
-  console.log("dbResponse from saving recipe: ", dbResponse);
-  res.json("recipe saved!");
+  console.log('dbResponse from saving recipe: ', dbResponse);
+  res.json('recipe saved!');
 });
 
-app.delete("/remove_saved_recipe", async (req, res) => {
+app.delete('/remove_saved_recipe', async (req, res) => {
   // get logged-in user's id
   const userId = req.session.passport.user._id;
   console.log("logged-in user's id: ", userId);
 
   // get clicked recipe's id
-  console.log("req.body: ", req.body);
+  console.log('req.body: ', req.body);
   const recipe_id = req.body.id;
-  console.log("recipe_id: ", recipe_id);
+  console.log('recipe_id: ', recipe_id);
 
   // remove recipe from user's `savedRecipes` array in mongodb
   let dbResponse = await User.findByIdAndUpdate(
     { _id: userId },
     { $pull: { savedRecipes: recipe_id } }
   );
-  console.log("dbResponse from saving recipe: ", dbResponse);
-  res.json("recipe removed");
+  console.log('dbResponse from saving recipe: ', dbResponse);
+  res.json('recipe removed');
 });
 
 // ****************** API REQUEST ROUTES ****************** \\
-const baseURL = "http://www.themealdb.com/api/json/v1/1/";
+const baseURL = 'http://www.themealdb.com/api/json/v1/1/';
 
 app.get(`/get_random_recipe`, async (req, res) => {
   const apiResponse = await axios.get(`${baseURL}/random.php`);
@@ -186,10 +194,16 @@ app.get(`/get_random_recipe`, async (req, res) => {
 
 app.get(`/search_recipes`, async (req, res) => {
   const config = { params: req.query };
-  console.log("axios config for /search_recipes ", config);
+  console.log('axios config for /search_recipes ', config);
 
-  const apiResponse = await axios.get(`${baseURL}/search.php`, config);
-  console.log("apiResponse.data for /get_recipe_details ", apiResponse.data);
+  const apiResponse = await axios.get(
+    `${baseURL}/search.php`,
+    config
+  );
+  console.log(
+    'apiResponse.data for /get_recipe_details ',
+    apiResponse.data
+  );
 
   res.json(apiResponse.data);
 });
@@ -200,25 +214,28 @@ app.get(`/filter_recipes`, async (req, res) => {
   const a = req.query.a;
 
   const apiResponse = await axios.get(
-    `${baseURL}/filter.php?${i ? `i=${i}` : ""}&${c ? `c=${c}` : ""}&${
-      a ? `a=${a}` : ""
-    }`
+    `${baseURL}/filter.php?${i ? `i=${i}` : ''}&${
+      c ? `c=${c}` : ''
+    }&${a ? `a=${a}` : ''}`
   );
 
-  console.log("API Response: ", apiResponse.data);
+  console.log('API Response: ', apiResponse.data);
 
   res.json(apiResponse.data);
 });
 
 app.get(`/get_recipe_details`, async (req, res) => {
   const config = { params: req.query };
-  console.log("axios config for /get_recipe_details ", config);
+  console.log('axios config for /get_recipe_details ', config);
 
   const apiResponse = await axios.get(
     `http://www.themealdb.com/api/json/v1/1/lookup.php?`,
     config
   );
-  console.log("apiResponse.data for /get_recipe_details ", apiResponse.data);
+  console.log(
+    'apiResponse.data for /get_recipe_details ',
+    apiResponse.data
+  );
 
   res.json(apiResponse.data);
 });
@@ -227,8 +244,8 @@ app.get(`/get_recipe_details`, async (req, res) => {
 // FUTURE WORK
 
 // *********** CATCH-ALL ROUTE for get requests *********** \\
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // tell server where to listen -> not 3000 as React listens there

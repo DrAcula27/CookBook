@@ -1,6 +1,7 @@
 {
   "name": "cook-book",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
@@ -26,17 +27,17 @@
     "react-dom": "^18.2.0",
     "react-js-loader": "^0.1.0",
     "react-router-dom": "^6.8.1",
-    "react-scripts": "^5.0.1",
     "react-select": "^5.7.0",
     "react-youtube": "^10.1.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev": "concurrently \"npm start\" \"nodemon server.js\""
+    "dev:client": "vite",
+    "dev": "concurrently \"npm run dev:client\" \"nodemon server.js\"",
+    "build": "vite build",
+    "preview": "vite preview --port 5173",
+    "start": "node server.js",
+    "test": "vitest"
   },
   "eslintConfig": {
     "extends": [
@@ -56,5 +57,10 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "concurrently": "^8.0.0",
+    "nodemon": "^3.0.1",
+    "vite": "^7.3.1"
+  }
 }

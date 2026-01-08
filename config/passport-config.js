@@ -1,12 +1,12 @@
 // passport (et. al.) use "strategies" to enable user login
-const localStrategy = require("passport-local").Strategy;
-const User = require("../models/user");
-const bcrypt = require("bcrypt");
+import { Strategy as LocalStrategy } from "passport-local";
+import User from "../models/user.js";
+import bcrypt from "bcrypt";
 
-module.exports = async function (passport) {
+export default async function initializePassport(passport) {
   // 1. use the local strategy - email/password checking
   passport.use(
-    new localStrategy(
+    new LocalStrategy(
       { usernameField: "email" },
       async (email, password, done) => {
         // check if user exists with this email
